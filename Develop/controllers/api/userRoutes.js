@@ -2,8 +2,6 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 
-const router = require('express').Router();
-const { User, Post, Comment } = require('../../models');
 router.get('/', (req, res) => {
     User.findAll({
             attributes: { exclude: ['[password'] }
@@ -27,13 +25,13 @@ router.get('/:id', (req, res) => {
                         'id',
                         'title',
                         'content',
-                        'created_at'
+                        'created_on'
                     ]
                 },
 
                 {
                     model: Comment,
-                    attributes: ['id', 'comment_text', 'created_at'],
+                    attributes: ['id', 'comment_text', 'created_on'],
                     include: {
                         model: Post,
                         attributes: ['title']
@@ -47,7 +45,7 @@ router.get('/:id', (req, res) => {
         })
         .then(dbUserData => {
             if (!dbUserData) {
-                res.status(404).json({ message: 'No user found with this id' });
+                res.status(404).json({ message: 'No such user' });
                 return;
             }
             res.json(dbUserData);
