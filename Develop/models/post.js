@@ -12,13 +12,16 @@ Post.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.STRING,
+
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false
     },
+
     date_created: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -37,7 +40,7 @@ Post.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'project',
+    modelName: 'post',
   }
 );
 
