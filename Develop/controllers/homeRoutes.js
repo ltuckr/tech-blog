@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
             ],
             include: [{
                     model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_on'],
+                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                     include: {
                         model: User,
                         attributes: ['username']
@@ -54,11 +54,11 @@ router.get('/post/:id', (req, res) => {
                 'id',
                 'content',
                 'title',
-                'created_on'
+                'created_at'
             ],
             include: [{
                     model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_on'],
+                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                     include: {
                         model: User,
                         attributes: ['username']
@@ -72,7 +72,7 @@ router.get('/post/:id', (req, res) => {
         })
         .then(dbPostData => {
             if (!dbPostData) {
-                res.status(404).json({ message: 'No post found' });
+                res.status(404).json({ message: 'No post found with this id' });
                 return;
             }
             const post = dbPostData.get({ plain: true });
@@ -99,7 +99,7 @@ router.get('/posts-comments', (req, res) => {
             ],
             include: [{
                     model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_on'],
+                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                     include: {
                         model: User,
                         attributes: ['username']
@@ -113,7 +113,7 @@ router.get('/posts-comments', (req, res) => {
         })
         .then(dbPostData => {
             if (!dbPostData) {
-                res.status(404).json({ message: 'No post found' });
+                res.status(404).json({ message: 'No post found with this id' });
                 return;
             }
             const post = dbPostData.get({ plain: true });

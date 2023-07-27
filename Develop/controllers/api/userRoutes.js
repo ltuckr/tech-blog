@@ -1,6 +1,9 @@
 //pulled from class miniproject
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
+const session = require("express-session");
+const withAuth = require("../../utils/auth");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 router.get('/', (req, res) => {
     User.findAll({
@@ -31,7 +34,7 @@ router.get('/:id', (req, res) => {
 
                 {
                     model: Comment,
-                    attributes: ['id', 'comment_text', 'created_on'],
+                    attributes: ['id', 'comment_text', 'created_at'],
                     include: {
                         model: Post,
                         attributes: ['title']
@@ -45,7 +48,7 @@ router.get('/:id', (req, res) => {
         })
         .then(dbUserData => {
             if (!dbUserData) {
-                res.status(404).json({ message: 'No such user' });
+                res.status(404).json({ message: 'No such user found' });
                 return;
             }
             res.json(dbUserData);
@@ -128,19 +131,21 @@ router.put('/:id', (req, res) => {
                 id: req.params.id
             }
         })
-        .then(dbUserData => {
-            if (!dbUserData[0]) {
-                res.status(404).json({ message: 'No such user found });
-                return;
+        .then((dbUserData) => {
+            if (!dbUserData) {
+              res.status(404).json({ message: 'No such user found ' });
+              return;
             }
             res.json(dbUserData);
-        })
-        .catch(err => {
+          })
+          .catch((err) => {
             console.log(err);
             res.status(500).json(err);
-        });
+          });
+      });
+      
+      module.exports = router;
 
-});
 
 router.delete('/:id', (req, res) => {
     User.destroy({
