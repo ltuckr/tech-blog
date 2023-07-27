@@ -1,4 +1,5 @@
-//taken from class mini project
+// User.js
+
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
@@ -17,7 +18,7 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    name: { // Use 'name' attribute
       type: DataTypes.STRING,
       allowNull: false,
     },
