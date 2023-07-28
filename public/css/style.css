@@ -1,19 +1,120 @@
-header, .project:not(:last-child) {
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .no-button {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    color: #1b89bc;
-    text-decoration: none;
-    font-size: 100%;
-  }
-  
-  .no-button:hover {
-    color: #065b83;
-    text-decoration: underline;
-  }
-  
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header styles */
+header {
+  background-color: #7548a9; /* Dark purple */
+  color: #ffffff; /* White text color */
+  padding: 10px;
+}
+
+.hero h1 {
+  font-size: 36px;
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.nav a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 5px;
+}
+
+.nav a:hover {
+  background-color: #9161cf; /* Light purple on hover */
+}
+
+/* Main content styles */
+main {
+  padding: 20px 0;
+}
+
+/* Card styles */
+.card {
+  background-color: #ffffff; /* White background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.card-header {
+  background-color: #7548a9; /* Dark purple */
+  color: #ffffff; /* White text color */
+  padding: 10px;
+  border-radius: 8px 8px 0 0;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.btn {
+  background-color: #7548a9; /* Dark purple */
+  color: #ffffff; /* White text color */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #9161cf; /* Light purple on hover */
+}
+
+/* Project styles */
+.project {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project:last-child {
+  border-bottom: none;
+}
+
+.project h4 {
+  margin: 0;
+}
+
+.btn-danger {
+  background-color: #e3342f; /* Dark red for delete button */
+  color: #ffffff; /* White text color */
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background-color: #f56565; /* Light red on hover */
+}
