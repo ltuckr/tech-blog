@@ -1,19 +1,12 @@
-//pulled from class miniproject
 const router = require('express').Router();
 const apiRoutes = require('./api');
-const homeRoutes = require('./homeRoutes.js');
-const dashboardRoutes = require('./dashboardRoutes.js');
-const commentRoutes = require('./commentRoutes.js');
-const postRoutes = require('./postRoutes.js');
-const loginRoutes = require('./loginRoutes.js');
+const homeRoutes = require('./home-routes.js');
+const dashboardRoutes = require('./dashboard-routes.js');
+
 
 router.use('/api', apiRoutes);
 router.use('/', homeRoutes);
 router.use('/dashboard', dashboardRoutes);
-router.use('/comment', commentRoutes);
-router.use('/post', postRoutes);
-router.use('/login', loginRoutes);
-
 router.use((req, res) => {
     res.status(404).end();
 });

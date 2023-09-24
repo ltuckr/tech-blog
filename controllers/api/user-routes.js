@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
             res.status(500).json(err);
         });
 });
-
+// get a single user
 router.get('/:id', (req, res) => {
     User.findOne({
             attributes: { exclude: ['password'] },
@@ -41,6 +41,7 @@ router.get('/:id', (req, res) => {
                 }
             ]
         })
+        
         .then(dbUserData => {
             if (!dbUserData) {
                 res.status(404).json({ message: 'No user found with this id' });
@@ -54,7 +55,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-
+// create a user
 router.post('/', (req, res) => {
 
     User.create({
@@ -77,7 +78,7 @@ router.post('/', (req, res) => {
             res.status(500).json(err);
         });
 });
-
+// login
 router.post('/login', (req, res) => {
     User.findOne({
             where: {
@@ -140,7 +141,7 @@ router.put('/:id', (req, res) => {
         });
 
 });
-
+// delete a user
 router.delete('/:id', (req, res) => {
     User.destroy({
             where: {
