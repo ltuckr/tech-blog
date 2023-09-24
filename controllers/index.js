@@ -5,12 +5,14 @@ const homeRoutes = require('./homeRoutes.js');
 const dashboardRoutes = require('./dashboardRoutes.js');
 const commentRoutes = require('./commentRoutes.js');
 const postRoutes = require('./postRoutes.js');
+const loginRoutes = require('./loginRoutes.js');
 
 router.use('/api', apiRoutes);
 router.use('/', homeRoutes);
 router.use('/dashboard', dashboardRoutes);
 router.use('/comment', commentRoutes);
 router.use('/post', postRoutes);
+router.use('/login', loginRoutes);
 
 router.use((req, res) => {
     res.status(404).end();

@@ -1,30 +1,42 @@
-async function editFormHandler(event) {
+const deleteBtn = document.getElementById("delete");
+const updateForm = document.getElementById("update-form");
+const post = document.getElementById("post")
+
+const deletePost = async (event) =>{
     event.preventDefault();
-  
-    const id = window.location.toString().split("/")[
-      window.location.toString().split("/").length - 1
-    ];
-  
-    const title = document.querySelector('input[name="post-title"]').value;
-    const post_text = document.querySelector('textarea[name="post-text"]').value;
-  
-    const response = await fetch(`/api/posts/${id}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        title,
-        post_text,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok) {
-      document.location.replace("/dashboard");
-    } else {
-      alert(response.statusText);
+    const id = post.getAttribute("data-postId");
+
+    const response = await fetch(`/dashboard/${id}`, {
+        method: "DELETE"
+    })
+
+    if(response.ok){
+        document.location.replace("/dashboard");
+    }else{
+        alert("Failed to delete the post!");
     }
-  }
-  
-  document
-    .querySelector(".edit-post-form")
-    .addEventListener("submit", editFormHandler);
+}
+
+const updatePost = async (event) => {
+    event.preventDefault();
+
+    const titleEl = document.getElementById("title-text");
+    const contentEl = document.getElementById("content-text");
+    const title = titleEl.value;
+    const content = contentEl.value;
+    const id = post.getAttribute("data-postId");
+
+    const response = await fetch(`/dashboard/singlepost/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({title, content}),
+        headers: {'Content-Type': 'application/json'}
+    })
+
+    if(response.ok){
+        document.location.replace("/dashboard");
+    }else{
+        alert("Failed to update the post!");
+    }
+}
+deleteBtn.addEventListener("click", deletePost);
+updateForm.addEventListener("submit", updatePost)

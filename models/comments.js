@@ -1,41 +1,16 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const router = require("express").Router()
 
-class Comment extends Model {}
-
-Comment.init({
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    comment_text: {
-        type: DataTypes.STRING,
-        validate: {
-
-            len: [5]
+router.get("/", async (req, res) => {
+    
+    try {
+        if(req.session.logged_in){
+            res.redirect("/dashboard");
+            return;
         }
-    },
-    user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'user',
-            key: 'id'
-        }
-    },
-    post_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'post',
-            key: 'id'
-        }
+        res.render("loginPage")
+    } catch (err) {
+        res.status(500).json(err);
     }
-}, {
-    sequelize,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'comment'
-});
-module.exports = Comment;
+})
+
+module.exports = router;
