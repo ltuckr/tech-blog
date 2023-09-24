@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
-
 router.get('/', (req, res) => {
     Comment.findAll({})
         .then(dbCommentData => res.json(dbCommentData))
@@ -10,7 +9,7 @@ router.get('/', (req, res) => {
             res.status(500).json(err);
         })
 });
-
+// get a single comment
 router.get('/:id', (req, res) => {
     Comment.findAll({
             where: {
@@ -23,7 +22,7 @@ router.get('/:id', (req, res) => {
             res.status(500).json(err);
         })
 });
-
+// create a comment
 router.post('/', withAuth, (req, res) => {
     if (req.session) {
         Comment.create({
@@ -38,7 +37,7 @@ router.post('/', withAuth, (req, res) => {
             })
     }
 });
-
+// update a comment
 router.put('/:id', withAuth, (req, res) => {
     Comment.update({
         comment_text: req.body.comment_text
@@ -48,7 +47,7 @@ router.put('/:id', withAuth, (req, res) => {
         }
     }).then(dbCommentData => {
         if (!dbCommentData) {
-            res.status(404).json({ message: 'No comment found' });
+            res.status(404).json({ message: 'No comment found with this id' });
             return;
         }
         res.json(dbCommentData);
@@ -57,7 +56,7 @@ router.put('/:id', withAuth, (req, res) => {
         res.status(500).json(err);
     });
 });
-
+// delete a comment
 router.delete('/:id', withAuth, (req, res) => {
     Comment.destroy({
         where: {
@@ -65,7 +64,7 @@ router.delete('/:id', withAuth, (req, res) => {
         }
     }).then(dbCommentData => {
         if (!dbCommentData) {
-            res.status(404).json({ message: 'No comment found' });
+            res.status(404).json({ message: 'No comment found with this id' });
             return;
         }
         res.json(dbCommentData);

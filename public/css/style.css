@@ -1,120 +1,203 @@
-/* Global styles */
-body {
-  font-family: Arial, sans-serif;
+*{
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-.wrapper {
+header, .project:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+
+.wrapper{
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
 }
 
-/* Header styles */
-header {
-  background-color: #7548a9; /* Dark purple */
-  color: #ffffff; /* White text color */
-  padding: 10px;
-}
-
-.hero h1 {
-  font-size: 36px;
-  margin: 0;
-}
-
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-}
-
-.nav a {
-  color: #ffffff;
+.no-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #1b89bc;
   text-decoration: none;
-  padding: 8px 10px;
-  border-radius: 5px;
+  font-size: 100%;
 }
 
-.nav a:hover {
-  background-color: #9161cf; /* Light purple on hover */
+.no-button:hover {
+  color: #065b83;
+  text-decoration: underline;
 }
 
-/* Main content styles */
-main {
-  padding: 20px 0;
+.logo:link{
+  color: black;
+  text-decoration: none;
 }
 
-/* Card styles */
-.card {
-  background-color: #ffffff; /* White background */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 20px;
+.logo:visited{
+  color: black;
+  text-decoration: none;
 }
 
-.card-header {
-  background-color: #7548a9; /* Dark purple */
-  color: #ffffff; /* White text color */
-  padding: 10px;
-  border-radius: 8px 8px 0 0;
-  font-size: 18px;
-  margin-bottom: 10px;
+.logo:hover{
+  color: black;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: 0.5s ease-in-out;
 }
 
-.form-label {
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  list-style-type: none;
+  margin: 0;
+  font-size: 1.5em;
+  
+  
+}
+
+.navbar a{
+  text-decoration: none;
+  margin: 0 5px
+}
+
+.navbar a:visited{
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar a:hover{
+  text-decoration: none;
+  color: inherit;
+}
+
+.post{
+  margin: 20px 0;
+  border: 1px lightgrey solid;
+  text-align: right;
+}
+
+.post-title{
+  background-color: lightgrey;
+  padding: 15px;
+  margin-top: 0;
+  text-align: left;
+}
+
+.post-title a:link{
+  color: #617ab7;
+  text-decoration: none;
+}
+
+.post-title a:visited{
+  color: #617ab7;
+  text-decoration: none;
+}
+
+.post-title a:hover{
+  text-decoration: none;
+  color: #0e506e;
+}
+
+.post-content{
+  padding: 10px !important;
+  text-align: left !important;
+}
+
+.post-button{
+  text-align: right;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.post-author{
+  text-align: right;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.post-username{
   font-weight: bold;
 }
 
-.form-input {
-  width: 100%;
+.dashboard-container{
+  display: block;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.footer-margin{
+  margin-top: 50px;
+}
+
+.form-row{
+  margin-bottom: 20px;
+}
+
+.signup{
+  margin-top: 20px;
+}
+
+.signup-form div{
+  margin-bottom: 20px;
+}
+
+.login-form div{
+  margin-bottom: 20px;
+}
+
+.edit-post-form{
+  margin-top: 20px;
+}
+
+.edit-post-form div{
+  margin-bottom: 20px;
+}
+
+.register{
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.single-post-container{
+  margin-top: 20px;
+}
+
+.comment-container{
+  margin-top: 20px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 15px;
+  border: 1px #d3d3d3 solid;
+  border-radius: 10px;
 }
 
-.btn {
-  background-color: #7548a9; /* Dark purple */
-  color: #ffffff; /* White text color */
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.comment-button{
+  margin-top: 20px;
 }
 
-.btn:hover {
-  background-color: #9161cf; /* Light purple on hover */
-}
-
-/* Project styles */
-.project {
-  border-bottom: 1px solid #ccc;
+.comment-text{
   padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
-.project:last-child {
-  border-bottom: none;
+.comment-author{
+  padding: 10px;
+  font-weight: bold;
 }
 
-.project h4 {
-  margin: 0;
+#signup button{
+  display: inline-block;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+.dashboard-post{
+  border: 1px #d3d3d3 solid;
 }
 
-.btn-danger {
-  background-color: #e3342f; /* Dark red for delete button */
-  color: #ffffff; /* White text color */
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.new-post-button{
+  margin: 20px 0;
 }
 
-.btn-danger:hover {
-  background-color: #f56565; /* Light red on hover */
+footer{
+  margin-top: 60px;
+  font-size: 1.4em;
 }

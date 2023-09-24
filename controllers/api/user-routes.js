@@ -1,10 +1,5 @@
-//pulled from class miniproject
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
-const session = require("express-session");
-const withAuth = require("../../utils/auth");
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
-
 router.get('/', (req, res) => {
     User.findAll({
             attributes: { exclude: ['[password'] }
@@ -15,7 +10,7 @@ router.get('/', (req, res) => {
             res.status(500).json(err);
         });
 });
-
+// get a single user
 router.get('/:id', (req, res) => {
     User.findOne({
             attributes: { exclude: ['password'] },
@@ -28,7 +23,7 @@ router.get('/:id', (req, res) => {
                         'id',
                         'title',
                         'content',
-                        'created_on'
+                        'created_at'
                     ]
                 },
 
@@ -46,9 +41,10 @@ router.get('/:id', (req, res) => {
                 }
             ]
         })
+        
         .then(dbUserData => {
             if (!dbUserData) {
-                res.status(404).json({ message: 'No such user found' });
+                res.status(404).json({ message: 'No user found with this id' });
                 return;
             }
             res.json(dbUserData);
@@ -59,11 +55,12 @@ router.get('/:id', (req, res) => {
         });
 });
 
-
+// create a user
 router.post('/', (req, res) => {
 
     User.create({
         username: req.body.username,
+        email: req.body.email,
         password: req.body.password
     })
 
@@ -81,7 +78,7 @@ router.post('/', (req, res) => {
             res.status(500).json(err);
         });
 });
-
+// login
 router.post('/login', (req, res) => {
     User.findOne({
             where: {
@@ -89,13 +86,13 @@ router.post('/login', (req, res) => {
             }
         }).then(dbUserData => {
             if (!dbUserData) {
-                res.status(404).json({ message: 'No such user found' });
+                res.status(400).json({ message: 'No user with that username!' });
                 return;
             }
             const validPassword = dbUserData.checkPassword(req.body.password);
 
             if (!validPassword) {
-                res.status(400).json({ message: 'Incorrect password. Please retry' });
+                res.status(400).json({ message: 'Incorrect password!' });
                 return;
             }
             req.session.save(() => {
@@ -104,7 +101,7 @@ router.post('/login', (req, res) => {
                 req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
 
-                res.json({ user: dbUserData, message: 'Welcome!' });
+                res.json({ user: dbUserData, message: 'You are now logged in!' });
             });
         })
         .catch(err => {
@@ -131,22 +128,20 @@ router.put('/:id', (req, res) => {
                 id: req.params.id
             }
         })
-        .then((dbUserData) => {
+        .then(dbUserData => {
             if (!dbUserData) {
-              res.status(404).json({ message: 'No such user found ' });
-              return;
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
             }
             res.json(dbUserData);
-          })
-          .catch((err) => {
+        })
+        .catch(err => {
             console.log(err);
             res.status(500).json(err);
-          });
-      });
-      
-      module.exports = router;
+        });
 
-
+});
+// delete a user
 router.delete('/:id', (req, res) => {
     User.destroy({
             where: {
@@ -155,7 +150,7 @@ router.delete('/:id', (req, res) => {
         })
         .then(dbUserData => {
             if (!dbUserData) {
-                res.status(404).json({ message: 'No such user found' });
+                res.status(404).json({ message: 'No user found with this id' });
                 return;
             }
             res.json(dbUserData);
