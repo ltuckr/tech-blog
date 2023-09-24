@@ -72,24 +72,24 @@ header, .project:not(:last-child) {
 
 .post{
   margin: 20px 0;
-  border: 1px lightgrey solid;
+  border: 1px rgb(134, 183, 190);
   text-align: right;
 }
 
 .post-title{
-  background-color: lightgrey;
+  background-color: rgb(134, 183, 190);
   padding: 15px;
   margin-top: 0;
   text-align: left;
 }
 
 .post-title a:link{
-  color: #617ab7;
+  color: #163276;
   text-decoration: none;
 }
 
 .post-title a:visited{
-  color: #617ab7;
+  color:  #163276;
   text-decoration: none;
 }
 
